@@ -5,14 +5,14 @@ export const runtime = "nodejs";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { groupId: string } }
+  { params }: { params: Promise<{ groupId: string }> }
 ) {
-    params = await params;
+  const { groupId } = await params;
   const { searchParams } = new URL(req.url);
   const month = Number(searchParams.get("month"));
   const year = Number(searchParams.get("year"));
 
-  const pdfBuffer = await generatePDFReport(params.groupId, month, year);
+  const pdfBuffer = await generatePDFReport(groupId, month, year);
 
   return new NextResponse(pdfBuffer, {
     status: 200,

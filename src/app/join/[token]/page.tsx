@@ -2,12 +2,12 @@ import { joinGroupWithLink } from "@/lib/actions";
 // import { redirect } from "next/navigation";
 
 interface JoinPageProps {
-  params: { token: string };
+  params: Promise<{ token: string }>;
 }
 
 export default async function JoinPage({ params }: JoinPageProps) {
   try {
-    await joinGroupWithLink(params.token);
+    await joinGroupWithLink((await params).token);
 
     // Optional: delay and redirect
     return (
