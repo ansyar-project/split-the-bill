@@ -7,6 +7,7 @@ import DemoteUserButton from "./DemoteUserButton";
 import { auth } from "@/lib/auth";
 import { getAllUsers } from "@/lib/actions";
 import DeleteUserButton from "./DeleteUserButton";
+import { User } from "@prisma/client";
 
 export default async function AdminPage() {
   const session = await auth();
@@ -32,7 +33,7 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, idx) => (
+              {users.map((user: User, idx) => (
                 <tr
                   key={user.id}
                   className={`transition ${
