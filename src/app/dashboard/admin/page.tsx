@@ -43,7 +43,7 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user: User, idx) => (
+              {users.map((user: User, idx: number) => (
                 <tr
                   key={user.id}
                   className={`transition ${
