@@ -15,9 +15,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SplitWise+",
-  description:
-    "Easily split group expenses and track balances with friends, roommates, and teams.",
+  title: "SplitTheBill",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "SplitTheBill",
+    description:
+      "Easily split group expenses and track balances with friends, roommates, and teams.",
+  },
 };
 
 export default function RootLayout({

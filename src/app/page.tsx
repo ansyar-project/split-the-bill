@@ -8,7 +8,7 @@ export default function LandingPage() {
       
       <div className="max-w-md text-center space-y-6">
         <h1 className="text-4xl font-bold text-zinc-800 dark:text-zinc-100">
-          Welcome to <span >SplitWise+</span>
+          Welcome to <span >SplitTheBill</span>
         </h1>
         <p className="text-zinc-600 dark:text-zinc-400 text-lg">
           Easily split group expenses and track balances with friends, roommates, and teams.
