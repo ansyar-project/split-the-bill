@@ -4,6 +4,13 @@ FROM node:22-alpine AS builder
 # Set working directory
 WORKDIR /app
 
+ARG DATABASE_URL NEXTAUTH_SECRET NEXTAUTH_URL NEXT_PUBLIC_BASE_URL
+
+ENV DATABASE_URL=${DATABASE_URL}
+ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+ENV NEXTAUTH_URL=${NEXTAUTH_URL}
+ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+
 # Install dependencies
 COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
 RUN \
