@@ -7,7 +7,17 @@ import DemoteUserButton from "./DemoteUserButton";
 import { auth } from "@/lib/auth";
 import { getAllUsers } from "@/lib/actions";
 import DeleteUserButton from "./DeleteUserButton";
-import { User } from "@prisma/client";
+// import { User } from "@prisma/client";
+
+type User = {
+    name: string;
+    id: string;
+    email: string;
+    password: string;
+    role: "admin" | "member";
+    createdAt: Date;
+    updatedAt: Date;
+}
 
 export default async function AdminPage() {
   const session = await auth();
