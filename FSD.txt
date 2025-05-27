@@ -1,0 +1,34 @@
+Feature Specification Document
+Entities & Relationships
+* User: id, name, email, password, role, createdAt, updatedAt
+* Group: id, name, description, createdBy, updatedAt
+* Membership: id, userId, groupId, role (admin/member), updatedAt
+* Expense: id, groupId, title, amount, paidBy (userId), createdAt, updatedAt
+* ExpenseSplit: id, expenseId, userId, shareAmount, updatedAt
+Server Actions (Next.js App Router)
+Auth Actions
+* signupUser(formData)
+* loginUser(formData)
+* logoutUser()
+Group Actions
+* createGroup(formData)
+* inviteUserToGroup(groupId, email)
+* joinGroupWithLink(linkToken)
+* deleteGroup(groupId)
+Expense Actions
+* addExpense(groupId, formData)
+* editExpense(expenseId, formData)
+* deleteExpense(expenseId)
+Report Actions
+* getMonthlyReport(groupId)
+* generatePDFReport(groupId) (Premium only)
+________________
+
+
+Premium Feature Ideas (Post-MVP)
+* Recurring expenses
+* Advanced analytics (e.g., spending trends)
+* OCR-based receipt scanning
+* In-app payments and settlement integration (e.g., PayPal, Stripe)
+* Push/email notifications for new expenses or settlements
+________________
