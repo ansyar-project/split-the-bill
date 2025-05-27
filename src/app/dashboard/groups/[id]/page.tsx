@@ -9,6 +9,24 @@ import { removeGroupMember, changeGroupMemberRole } from "@/lib/actions";
 import GroupMembersTable from "@/components/GroupMembersTable";
 import GroupExpensesTable from "@/components/GroupExpensesTable";
 
+type Member = {
+    user: {
+        name: string;
+        id: string;
+        email: string;
+        password: string;
+        role: "admin" | "member";
+        createdAt: Date;
+        updatedAt: Date;
+    };
+} & {
+    id: string;
+    role: string;
+    updatedAt: Date;
+    userId: string;
+    groupId: string;
+}
+
 export default async function GroupDetailPage({
   params,
 }: {
@@ -29,7 +47,7 @@ export default async function GroupDetailPage({
   if (!group) return notFound();
 
   const isAdmin = group.memberships.some(
-    (m) => m.userId === session.user.id && m.role === "admin"
+    (m: Member) => m.userId === session.user.id && (m.role as "admin" | "member") === "admin"
   );
 
   return (
@@ -63,7 +81,7 @@ export default async function GroupDetailPage({
         <h2 className="text-xl font-bold text-zinc-200 mb-3">Members</h2>
         <div className="rounded-2xl border border-zinc-700 bg-zinc-900 shadow-lg overflow-hidden">
           <GroupMembersTable
-            memberships={group.memberships.map(m => ({
+            memberships={group.memberships.map((m: Member) => ({
               ...m,
               role: m.role as "admin" | "member"
             }))}

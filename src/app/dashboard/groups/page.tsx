@@ -3,6 +3,23 @@ import prisma from "@/lib/db";
 import { GroupCard } from "./GroupCard";
 import { CreateGroupForm } from "@/components/CreateGroupForm";
 
+type Membership = {
+    group: {
+        name: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        description: string | null;
+        createdBy: string;
+    };
+} & {
+    id: string;
+    role: string;
+    updatedAt: Date;
+    userId: string;
+    groupId: string;
+};
+
 export default async function GroupsPage() {
   const session = await auth();
   if (!session?.user) return null;
@@ -31,7 +48,7 @@ export default async function GroupsPage() {
               </div>
             ) : (
               <div className="flex flex-col gap-6">
-                {memberships.map((m) => (
+                {memberships.map((m: Membership) => (
                   <div
                     key={m.group.id}
                     className="rounded-xl shadow-lg bg-zinc-900 border border-zinc-800 hover:border-blue-600 transition"

@@ -99,7 +99,8 @@ export async function generatePDFReport(
   if (!group) throw new Error("Group not found");
 
   // Fetch expenses for the month/year if provided, otherwise all
-  let expenses = [];
+  type ExpenseWithPaidBy = Awaited<ReturnType<typeof prisma.expense.findFirst>> & { paidBy: { id: string; name: string; email: string; password: string; role: string; createdAt: Date; updatedAt: Date; } };
+  let expenses: ExpenseWithPaidBy[] = [];
   if (month && year) {
     expenses = await prisma.expense.findMany({
       where: {
@@ -111,13 +112,13 @@ export async function generatePDFReport(
       },
       include: { paidBy: true },
       orderBy: { createdAt: "asc" },
-    });
+    }) as ExpenseWithPaidBy[];
   } else {
     expenses = await prisma.expense.findMany({
       where: { groupId },
       include: { paidBy: true },
       orderBy: { createdAt: "asc" },
-    });
+    }) as ExpenseWithPaidBy[];
   }
 
   // Calculate balances

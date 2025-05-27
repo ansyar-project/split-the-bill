@@ -6,6 +6,23 @@ import MonthlyReport from "@/components/MonthlyReport";
 import Link from "next/link";
 import { UsersIcon, ShieldCheckIcon, UserIcon, PlusIcon } from "@heroicons/react/24/solid";
 
+type Membership = {
+    group: {
+        name: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        description: string | null;
+        createdBy: string;
+    };
+} & {
+    id: string;
+    role: string;
+    updatedAt: Date;
+    userId: string;
+    groupId: string;
+}
+
 export default async function DashboardPage() {
   const session = await auth();
   if (!session) redirect("/login");
@@ -40,7 +57,7 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <ul className="mb-4 space-y-2">
-              {memberships.map((m) => (
+              {memberships.map((m: Membership) => (
                 <li
                   key={m.group.id}
                   className="flex items-center gap-3 px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 transition"
@@ -77,7 +94,7 @@ export default async function DashboardPage() {
 
         {/* Monthly Reports for each group */}
         <div className="space-y-8">
-          {memberships.map((m) => (
+          {memberships.map((m: Membership) => (
             <div
               key={m.group.id}
               className="bg-zinc-900 border border-zinc-800 rounded-xl shadow-lg p-6"
