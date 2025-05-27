@@ -7,7 +7,7 @@ import { SessionStrategy } from "next-auth";
 import { Role } from "@prisma/client";
 import type { NextAuthOptions } from "next-auth";
 
-export const authOptions: NextAuthOptions  = {
+const authOptions: NextAuthOptions  = {
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt" as SessionStrategy,
